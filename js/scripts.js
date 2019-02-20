@@ -7,7 +7,7 @@ d3.json(url, function(data) {
       bottom: 30,
       left: 40
     },
-    width = 960 - margin.left - margin.right,
+    width = 720 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
   var formatPercent = d3.format("0,000");
