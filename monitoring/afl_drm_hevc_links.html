@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html> <!-- html5 web page -->
+<head>
+    <title>AFL DRM HEVC Live</title>
+
+    <script src="js/sha256.js"></script>
+    <script src="js/enc-base64-min.js"></script>
+    <script src="js/jquery-1.6.1.min.js"></script>
+
+    <script src="https://player.ooyala.com/static/v4/production/latest/core.min.js"></script>
+
+    <script src="https://player.ooyala.com/static/v4/production/latest/skin-plugin/html5-skin.min.js">
+    </script>
+    <script src="https://player.ooyala.com/static/v4/production/latest/video-plugin/bit_wrapper.min.js">
+    </script>
+    <script src="https://player.ooyala.com/static/v4/production/latest/video-plugin/main_html5.min.js">
+    </script>
+    <!-- not required unless using hds and flash
+    <script src="//player.ooyala.com/static/v4/production/latest/video-plugin/osmf_flash.min.js">
+    </script>
+    -->
+    <link rel="stylesheet" href="https://player.ooyala.com/static/v4/production/latest/skin-plugin/html5-skin.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/default.css"/>
+
+
+    <script>
+        var embedCode;
+        var playerId;
+        var partnerCode;
+        var thePlayer;
+        var channelId;
+
+        // Embed token URL components
+        var baseUrl = 'https://player.ooyala.com';
+        var embedTokenPath = '/sas/embed_token/';
+        var apiKey = '';
+        var secret = '';
+        var httpMethod = "GET";
+        var expirationSeconds = 30; //production expiry
+        // var expirationSeconds = 4320000; // FOR TEST purposes only
+        var theEmbedCodes = ['tvZjdnZzE6BI1-8TN-Fax_NTrplVbWFZ','IwZjdnZzE6xDMiyFfad6B90D1qdJXdKB','l5ZjdnZzE6Zw_-Yh2UoPMW2Wr1gKyINj','NqZTdnZzE6He467VJbbAGf6z7WGXb9lw','cxZTdnZzE6yCueDL6GHOTVqD7Pz1ikAV','g5ZzdnZzE6c9XdcfNBN-5-M_WJh7DGg7','U1ZzdnZzE6QTSuHMmEtX-8pjRSpx84qt','cwZDdnZzE6WOEFFOmajIShJHmABdQMfr']; //'pvdDFyZDE6Sgh3zDEh7cgeAfebP52z5x', 'JodTFyZDE6y2U5NAf7xXz88-EEEhqdLA'];
+        var theChannels = ["Channel 7 VIC", "Channel 7 SA", "Channel 7 WA", "Channel 7 QLD", "Channel 7 NSW", "Fox Sport 3 National", "Fox Footy National", "AFLTV Linear channel"]; //"AFL Womens Channel 1", "AFL Womens Channel 2"];
+        var msg = "";
+/*
+        window.onload = function() {
+            for (i=0; i < 10; i++){
+                initPlayer(i);
+
+            }
+
+        };
+
+*/
+        function initPlayer(id) {
+            console.log('initPlayer() ->');
+            if(thePlayer){
+
+               thePlayer.destroy();
+
+               }
+            channelId = id;
+            console.log('!!! the channel id is :: ['+channelId+']');
+
+            var theEmbedCode = theEmbedCodes[channelId];
+            if(theEmbedCode) {
+                embedCode = encodeURIComponent(theEmbedCode);
+                console.log('!!! OVERRIDING default embed code with :: ['+embedCode+']');
+            } else {
+                console.log('!!! USING default embed code :: ['+embedCode+']');
+            }
+
+
+            var thePlayerId = '89a379a0e1e94feca5bb87c46a8b2d5e';
+            if(thePlayerId) {
+                playerId = encodeURIComponent(thePlayerId);
+                console.log('!!! OVERRIDING default player ID with :: ['+playerId+']');
+            } else {
+                console.log('!!! USING default player ID :: ['+playerId+']');
+            }
+
+            var thePartnerCode = 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi';
+            if(thePartnerCode) {
+                partnerCode = encodeURIComponent(thePartnerCode);
+                console.log('!!! OVERRIDING default partner code with :: ['+partnerCode+']');
+            } else {
+                console.log('!!! USING default partner code :: ['+partnerCode+']');
+            }
+            var theApiKey = 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi.VoTdK';
+            if(theApiKey) {
+                apiKey = encodeURIComponent(theApiKey);
+                console.log('!!! OVERRIDING default API key with :: ['+apiKey+']');
+            } else {
+                console.log('!!! USING default API key :: ['+apiKey+']');
+            }
+
+            var theSecret = 'IpFpMbLzmhop9hnMO3YnU_5YoxPQ99DgcNm5yrqa';
+            if(theSecret) {
+                secret = encodeURIComponent(theSecret);
+                console.log('!!! OVERRIDING default secret with :: ['+secret+']');
+            } else {
+                console.log('!!! USING default secret :: ['+secret+']');
+            }
+            checkPlayerLoaded();
+
+        }
+        function checkPlayerLoaded(){
+            if(undefined == OO) {
+                console.log('Still waiting for the OO ...');
+                setTimeout(checkPlayerLoaded,100);
+            } else {
+                OO.ready(function() {
+                    console.log('OO.ready() ->');
+
+                    setupPlayer();
+                });
+            }
+        }
+        function setupPlayer() {
+            console.log("setupPlayer() ->");
+            var container = 'playerWrapper' + channelId;
+            embedTokenUrl = generateEmbedTokenUrl(embedCode);
+            //clear log
+            $("#log").val("");
+            var playerParam = {
+                pcode: partnerCode,
+                embedToken : embedTokenUrl,
+                debug: true,
+                playerBrandingId: playerId,
+                autoplay: true,
+
+                skin: {
+                    config: 'https://player.ooyala.com/static/v4/stable/4.26.10/skin-plugin/skin.json'
+                } ,
+                // other params
+                onCreate: function(player) {
+                    player.mb.subscribe('*', 'test', function(event) {
+                        //if (event.match(/metadataFetched/)) {
+                        console.log("AFL: " + event + JSON.stringify(arguments, null, '\t'), arguments);
+                        //var msg = 'Event logging for ' +  channelId + ': [EventName: ' + event + ']'+ JSON.stringify(arguments, null, '\t'), arguments;
+                        //$("#log").val($("#log").val() + '\n' + msg);
+
+                        //	}
+                        if (event.match(/videoWillPlay/)) {
+
+                            var liveStream = JSON.stringify(arguments[2], null, '\t');
+                            //document.getElementById("playerWrapper"+ channelId).innerHTML ="Actual Stream URL :" + liveStream;
+                            console.log("THIS STREAM: " + theChannels[channelId] + JSON.stringify(arguments[2], null, '\t'));
+                            msg = "CDN URL " + JSON.stringify(arguments[2], null, '\t');
+                          //  $("#log2").val($("#log2").val() + '\n' + msg);
+						  $("#log2").val('\n' + msg);
+                        }
+                    });
+                }
+            };
+            console.log('Player options ::');
+            console.dir(playerParam);
+            thePlayer = OO.Player.create(container, embedCode, playerParam);
+
+            //$("#log2").val($("#log2").val() + '\n' + 'Embed Token Url :: ' + embedTokenUrl);
+
+            console.log("<- setupPlayer()");console.log("<- setupPlayer()");
+        }
+
+        function generateEmbedTokenUrl(embedCode) {
+            console.log("generateEmbedTokenUrl() -> embedCode ["+embedCode+"]");
+            var now = new Date().getTime();
+            var expires = Math.round(now/1000 + expirationSeconds);
+            var signature = generateSignatureForEmbedTokenUrl(embedCode, expires);
+            var url = baseUrl + embedTokenPath + partnerCode + "/" + embedCode + "?api_key=" + apiKey + "&expires=" + expires + "&signature=" + encodeURIComponent(signature);
+            console.log("<- generated URL for playback token ["+url+"]");
+            return url;
+        }
+
+        function generateSignatureForEmbedTokenUrl(embedCode, expires) {
+            console.log("generateSignatureForEmbedTokenUrl() -> embedCode ["+embedCode+"] expires ["+expires+"]");
+            var payload = secret + httpMethod + embedTokenPath + partnerCode + "/" + embedCode  + "api_key="+ apiKey + "expires=" + expires;
+            console.log("Signature payload ::");
+            console.dir(payload);
+            var hash = CryptoJS.SHA256(payload);
+            var signature = hash.toString(CryptoJS.enc.Base64);
+            signature = signature.substring(0,43);
+            signature = signature.replace(/=+$/, "");
+            console.log("<- generated the following signature: ["+signature+"] ...");
+            return signature;
+        }
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="Table">
+    <div class="Title">
+        <p>AFL - DRM HEVC Live Streams</p>
+    </div>
+    <div class="Heading">
+        <div class="Cell">
+            <p>Channel 7 - VIC</p>
+			<a href="javascript:initPlayer(0)">Start</a>
+        </div>
+        <div class="Cell">
+            <p>Channel 7 - SA</p>
+			<a href="javascript:initPlayer(1)">Start</a>
+        </div>
+        <div class="Cell">
+            <p>Channel 7 - WA</p>
+			<a href="javascript:initPlayer(2)">Start</a>
+        </div>
+        <div class="Cell">
+            <p>Channel 7 - QLD</p>
+			<a href="javascript:initPlayer(3)">Start</a>
+        </div>
+    </div>
+    <div class="Row">
+        <div class="Cell">
+            <div id='playerWrapper0' style='background : #AAFF42; width:320px;height:180px; margin : 10px;'></div>
+        </div>
+        <div class="Cell">
+
+            <div id='playerWrapper1' style='background : #AAFF42; width:320px;height:180px; margin : 10px;'></div>
+        </div>
+        <div class="Cell">
+
+            <div id='playerWrapper2' style='background : #AAFF42; width:320px;height:180px; text-align: center; margin : 10px;'></div>
+        </div>
+        <div class="Cell">
+
+            <div id='playerWrapper3' style='background : #AAFF42; width:320px;height:180px; margin:10px;'></div>
+        </div>
+    </div>
+    <div class="Heading">
+
+
+        <div class="Cell">
+            <p>Channel 7 - NSW</p>
+			<a href="javascript:initPlayer(4)">Start</a>
+        </div>
+        <div class="Cell">
+            <p>Fox Sport 3 - National</p>
+			<a href="javascript:initPlayer(5)">Start</a>
+
+        </div>
+        <div class="Cell">
+            <p>Fox Footy National </p>
+			<a href="javascript:initPlayer(6)">Start</a>
+
+        </div>
+        <div class="Cell">
+            <p>AFL TV Linear</p>
+						<a href="javascript:initPlayer(7)">Start</a>
+
+        </div>
+    </div>
+    <div class="Row">
+
+
+        <div class="Cell">
+
+            <div id='playerWrapper4' style='background : #AAFF42; width:320px;height:180px; margin : 10px;'></div>
+        </div>
+        <div class="Cell">
+
+            <div id='playerWrapper5' style='background : #AAFF42; width:320px;height:180px; margin : 10px;'></div>
+        </div>
+        <div class="Cell">
+            <div id='playerWrapper6' style='background : #AAFF42; width:320px;height:180px; margin : 10px;'></div>
+        </div>
+        <div class="Cell">
+
+            <div id='playerWrapper7' style='background : #AAFF42; width:320px;height:180px; margin : 10px;'></div>
+        </div>
+
+    </div>
+<!--
+    <div class="Heading">
+
+        <div class="Cell">
+            <p>AFL Womens Channel 1</p>
+						<a href="javascript:initPlayer(8)">Start</a>
+
+        </div>
+        <div class="Cell">
+            <p>AFL Womens Channel 2</p>
+						<a href="javascript:initPlayer(9)">Start</a>
+
+        </div>
+    </div>
+    <div class="Row">
+        <div class="Cell">
+
+
+
+            <div id='playerWrapper8' style='background : #AAFF42; width:320px;height:180px; margin : 10px;'></div>
+        </div>
+        <div class="Cell">
+
+            <div id='playerWrapper9' style='background : #AAFF42; width:320px;height:180px; margin : 10px;'></div>
+        </div>
+    </div>
+-->
+
+</div>
+
+
+
+
+<textarea id="log2" style="width: 100%; margin : 10px;" cols="0" rows="20">CDN URLs</textarea>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,46 @@
+<!-- This embed code automatically includes and packages standard Player V4 plugins. If you need a different mix of plugins, please use the Advanced embed option. To see the included plugins, please refer to this doc: http://help.ooyala.com/video-platform/concepts/pbv4_release_notes.html -->
+<html>
+<head>
+	<script src="//player.ooyala.com/core/89a379a0e1e94feca5bb87c46a8b2d5e"></script>
+	<script src="js/sha256.js"></script>
+    <script src="js/enc-base64-min.js"></script>
+    <script src="js/jquery-1.6.1.min.js"></script>
+	
+<!-- Player parameter modify some basic player behaviors and looks -->
+<script>
+var embedCode = 'pvdDFyZDE6Sgh3zDEh7cgeAfebP52z5x';
+
+var embedTokenUrl = generateEmbedTokenUrl(embedCode);
+
+function generateEmbedTokenUrl(embedCode) {
+            console.log("generateEmbedTokenUrl() -> embedCode ["+embedCode+"]");
+            var now = new Date().getTime();
+            var expires = Math.round(now/1000 + 30);
+            var signature = generateSignatureForEmbedTokenUrl(embedCode, expires);
+            var url = "https://player.ooyala.com/sas/embed_token/Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi/" + embedCode + "?api_key=" + 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi.VoTdK' + "&expires=" + expires + "&signature=" + encodeURIComponent(signature);
+            console.log("<- generated URL for playback token ["+url+"]");
+            return url;
+        }
+
+        function generateSignatureForEmbedTokenUrl(embedCode, expires) {
+            console.log("generateSignatureForEmbedTokenUrl() -> embedCode ["+embedCode+"] expires ["+expires+"]");
+            var payload = 'IpFpMbLzmhop9hnMO3YnU_5YoxPQ99DgcNm5yrqa' + "GET" + '/sas/embed_token/' + 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi' + "/" + embedCode  + "api_key="+ 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi.VoTdK' + "expires=" + expires;
+            console.log("Signature payload ::");
+            console.dir(payload);
+            var hash = CryptoJS.SHA256(payload);
+            var signature = hash.toString(CryptoJS.enc.Base64);
+            signature = signature.substring(0,43);
+            signature = signature.replace(/=+$/, "");
+            console.log("<- generated the following signature: ["+signature+"] ...");
+            return signature;
+        }
+var playerParam = {embedToken:embedTokenUrl, autoplay:true};
+OO.ready(function() {window.pp = OO.Player.create('container_ch7', 'pvdDFyZDE6Sgh3zDEh7cgeAfebP52z5x', playerParam);});
+</script>
+</head>
+<body style="overflow:hidden">
+<!-- The following div will contain the instantiated player, and is identified by id -->
+<div id='container_ch7' style='background : #AAFF42; width:320px;height:180px; margin : 10px; align:top'></div>
+
+</body>
+</html>

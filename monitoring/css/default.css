@@ -1,0 +1,74 @@
+.Table
+{
+    display: table;
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+}
+.Title
+{
+    display: table-caption;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+.Heading
+{
+    display: table-row;
+    font-weight: bold;
+    text-align: center;
+}
+.Row
+{
+    display: table-row;
+}
+.Cell
+{
+    display: table-cell;
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+.Player
+{
+    background: #AAFF42;
+    /*width:320px;
+    height:180px; */
+    margin : 10px;
+}
+.Player2x
+{
+    background: #AAFF42;
+    width:640px;
+    height:360px;
+    margin : 10px;
+}
+
+
+#bodyId {
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+div#outerWrapDiv {
+    position: relative;
+    height: 100%;
+    width: 700px;
+
+}
+.encoder{
+
+    font-size: smaller;
+}
+
+.important{
+
+    color: red;
+    font-style: bold;
+}
