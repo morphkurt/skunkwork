@@ -1,0 +1,57 @@
+<html>
+ <head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+     <!--Test-->
+	<title>Compare Audio Loudness Levels</title>
+ </head>
+<body>
+	<div style="width:1000px; margin: auto;">
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div style="width:500;text-align: center;float: left;">
+			<h3>MMM</h3>
+			<audio controls="controls">
+   				 <source src="aflradio-1551237949.aac" type="audio/mp4" />
+			</audio>
+			<p>Integrated Loudness: -24.82 LUFS</p>
+			<p>True Peak Value: -5.69 dbFS</p>
+			<p>Loudness Range: 3.00 LU</p>
+			<br>
+			<br>
+			<h3>Footy Feed</h3>
+			<audio controls="controls">
+   				 <source src="940030.aac" type="audio/mp4" />
+			</audio>
+			<p>Integrated Loudness: -29.66 LUFS</p>
+			<p>True Peak Value: -18.47 dbFS</p>
+			<p>Loudness Range: 4.30 LU</p>
+		</div>
+		<div style="width:500;text-align: center;float: right;">
+			<h3>MMM radio (Post Proccessed)</h3>
+			<audio controls="controls">
+   				 <source src="aflradio-1551237949-afterLoad.aac" type="audio/mp4" />
+			</audio>
+			<p>Integrated Loudness: -14.56 LUFS</p>
+			<p>True Peak Value: -3.00 dbFS</p>
+			<p>Loudness Range: 2.20 LU</p>
+			<br>
+			<br>
+			<h3>Footy Feed (Post Proccessed)</h3>
+			<audio controls="controls">
+   				 <source src="940030_out.aac" type="audio/mp4" />
+			</audio>
+			<p>Integrated Loudness: -15.33 LUFS</p>
+			<p>True Peak Value: -3.00 dbFS</p>
+			<p>Loudness Range: 2.90 LU</p>
+		</div>
+
+	</div>
+</body>
+
+</html>
