@@ -33,6 +33,7 @@
     video1.addEventListener('loadedmetadata',function() {
       video1.play();
     });
+  }
   else if (video2.canPlayType('application/vnd.apple.mpegurl')) {
     video2.src = 'https://aflliveradioshls349.ngcdn.telstra.com/afllive/aflradio_12/playlist.m3u8';
     video2.addEventListener('loadedmetadata',function() {
