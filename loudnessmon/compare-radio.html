@@ -1,0 +1,74 @@
+<html>
+ <head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+     <!--Test-->
+     
+ <script>
+  var video2 = document.getElementById('video2');
+  var video1 = document.getElementById('video1');
+  if(Hls.isSupported()) {
+    var hls = new Hls();
+    var hls2 = new Hls();
+    hls.loadSource('http://tlsmultishowcase358.ngcdn.telstra.com/radio/aflradio_12/playlist.m3u8');
+    hls.attachMedia(video1);
+    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      video1.play();
+  });
+   hls2.loadSource('https://aflliveradioshls349.ngcdn.telstra.com/afllive/aflradio_12/playlist.m3u8');
+    hls2.attachMedia(video2);
+    hls2.on(Hls.Events.MANIFEST_PARSED,function() {
+      video2.play();
+  });
+ }
+ // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+ // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element throught the `src` property.
+ // This is using the built-in support of the plain video element, without using hls.js.
+ // Note: it would be more normal to wait on the 'canplay' event below however on Safari (where you are most likely to find built-in HLS support) the video.src URL must be on the user-driven
+ // white-list before a 'canplay' event will be emitted; the last video event that can be reliably listened-for when the URL is not on the white-list is 'loadedmetadata'.
+  else if (video1.canPlayType('application/vnd.apple.mpegurl')) {
+    video1.src = 'http://tlsmultishowcase358.ngcdn.telstra.com/radio/aflradio_12/playlist.m3u8';
+    video1.addEventListener('loadedmetadata',function() {
+      video1.play();
+    });
+  else if (video2.canPlayType('application/vnd.apple.mpegurl')) {
+    video2.src = 'https://aflliveradioshls349.ngcdn.telstra.com/afllive/aflradio_12/playlist.m3u8';
+    video2.addEventListener('loadedmetadata',function() {
+      video2.play();
+    });
+  }
+</script>
+
+
+	<title>Compare Audio Loudness Levels</title>
+ </head>
+<body>
+	<div style="width:1000px; margin: auto;">
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div style="width:500;text-align: center;float: left;">
+			<h3>MMM</h3>
+			<video id="video1"></video>
+			<p>Integrated Loudness: -24.82 LUFS</p>
+			<p>True Peak Value: -5.69 dbFS</p>
+			<p>Loudness Range: 3.00 LU</p>
+			
+		</div>
+		<div style="width:500;text-align: center;float: right;">
+			<h3>MMM radio (Post Proccessed)</h3>
+      <video id="video2"></video>
+			<p>Integrated Loudness: -14.56 LUFS</p>
+			<p>True Peak Value: -3.00 dbFS</p>
+			<p>Loudness Range: 2.20 LU</p>
+		</div>
+
+	</div>
+</body>
+
+</html>
