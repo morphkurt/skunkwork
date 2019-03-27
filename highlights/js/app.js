@@ -43,7 +43,7 @@ function loadData() {
                 dropdownTeam.prop('selectedIndex', 0);
 
                 dropdownPlayer.empty();
-                dropdownPlayer.append('<option selected="true" disabled>Choose Player</option>');
+                dropdownPlayer.append('<option selected="true" disabled>Choose Player (Optional)</option>');
                 dropdownPlayer.prop('selectedIndex', 0);
 
 
