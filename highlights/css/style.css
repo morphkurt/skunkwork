@@ -1,0 +1,67 @@
+body{
+    margin:0;
+    padding:0;
+    font-family:Libre Baskerville,serif;
+    color:#595955
+}
+h1, h2 {
+    font-family: Arial,sans-serif;
+    text-transform: uppercase;
+}
+.bar {
+    fill: orange;
+}
+
+.line {
+  fill: none;
+  stroke: red;
+  stroke-width: 2px;
+}
+
+text { 
+    font: 10px sans-serif;	
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.d3-tip {
+  line-height: 1;
+  font: 10px sans-serif;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+    .track,
+    .track-inset,
+    .track-overlay {
+      stroke-linecap: round;
+    }
+
+    .track {
+      stroke: #000;
+      stroke-opacity: 0.3;
+      stroke-width: 10px;
+    }
+
+    .track-inset {
+      stroke: #dcdcdc;
+      stroke-width: 8px;
+    }
+
+    .track-overlay {
+      pointer-events: stroke;
+      stroke-width: 50px;
+      stroke: transparent;
+      cursor: crosshair;
+    }
+
+    .handle {
+      fill: #fff;
+      stroke: #000;
+      stroke-opacity: 0.5;
+      stroke-width: 1.25px;
+    }
