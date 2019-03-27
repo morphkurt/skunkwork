@@ -1,0 +1,57 @@
+<html>
+ <head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="https://vjs.zencdn.net/5.4.6/video-js.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://unpkg.com/video.js/dist/video.js"></script>
+	<script src="js/app.js"></script>
+	<script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
+     <!--Test-->
+	<title>Create Your Own Highlights Package</title>
+ </head>
+<body>
+	<div style="width:1000px; margin: auto;">
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div style="width:250;text-align: left;float: left;">
+			<h3>Selection</h3>
+			Team: 
+			<select id="team" style="ext-align: right;float: right;">
+  			</select>
+  			<br>
+  			<br>
+  			Period: 
+			<select id="period" style="ext-align: right;float: right;">
+  			</select>
+  			<br>
+  			<br>
+  			Player:
+			<select id="player" style="ext-align: right;float: right;">
+  			</select>
+  			<br>
+  			<br>
+  			Play:
+  			<select id="play" style="ext-align: right;float: right;">
+  			</select>
+  			<br>
+  			<br>
+  			<button id="createVideo" type="button">Create Video</button>
+  			<br>
+  			<br>
+  			<p id="result"></p>
+		</div>
+		<div style="width:750;text-align: center;float: right;">
+			<h3>Video</h3>
+			  <video-js style="float:right;" id=vid2 width=600 height=300 class="vjs-default-skin" controls>
+			  </video-js>
+		</div>
+
+	</div>
+</body>
+
+</html>
