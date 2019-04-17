@@ -5,17 +5,20 @@ let dropdownTeam;
 let dropdownPlayer;
 let dropdownPlay;
 let dropdownPeriod;
+let dropdownRanking;
+
 
 let period;
 let player;
 let team;
 let play;
+let ranking;
 
 let cliplength=10;
 
 var json={
     "baseDomain":"https://bpmultihlsvods257.ngcdn.telstra.com",
-    "urlPrefix":"/hls-vod/ingest_aflfilms_vod/2019/03/982768/VOD_Source/2019-03-22_10-53-22-3925",
+    "urlPrefix":"/hls-vod/ingest_aflfilms_vod/2018/09/974272/VOD_Source/2018-09-30_10-59-29-2516",
     "assetLength":1197,
     "rates":[
         {"rate":2400000, "playListName":"output_2400kbps_720p.mp4"},
@@ -31,12 +34,13 @@ var json={
 
 
 function loadData() {
-        $.getJSON( "https://raw.githubusercontent.com/morphkurt/skunkwork/master/videoclip/js/vision-trxs-20190140101.json", function( json ) {
+        $.getJSON( "https://raw.githubusercontent.com/morphkurt/skunkwork/master/videoclip/js/vision-trxs-20180142701.json", function( json ) {
                 matchData=json;
                 dropdownTeam = $('#team');
                 dropdownPlayer = $('#player');
                 dropdownPlay = $('#play');
                 dropdownPeriod = $('#period');
+		dropdownRanking = $('#ranking');
 
                 dropdownTeam.empty();
                 dropdownTeam.append('<option selected="true" disabled>Choose Team</option>');
@@ -45,12 +49,23 @@ function loadData() {
                 dropdownPlayer.empty();
                 dropdownPlayer.append('<option selected="true" disabled>Choose Player (Optional)</option>');
                 dropdownPlayer.prop('selectedIndex', 0);
+ 		
+		dropdownRanking.empty();
+                dropdownRanking.append('<option selected="true" disabled>Choose Order (Optional)</option>');
+                dropdownRanking.append($('<option></option>').attr('value', 'time').text('time'));
+                dropdownRanking.append($('<option></option>').attr('value', 'asc').text('asc'));
+                dropdownRanking.append($('<option></option>').attr('value', 'desc').text('desc'));
+                dropdownRanking.append($('<option></option>').attr('value', 'top').text('top'));
+                dropdownRanking.append($('<option></option>').attr('value', 'top5').text('top5'));
+                dropdownRanking.prop('selectedIndex', 0);
+
 
 
                 dropdownPlay.empty();
                 dropdownPlay.append('<option selected="true" disabled>Choose Play</option>');
                 dropdownPlay.append($('<option></option>').attr('value', 'goal').text('Goal'));
                 dropdownPlay.append($('<option></option>').attr('value', 'kick').text('Kick'));
+                dropdownPlay.append($('<option></option>').attr('value', 'mark').text('Mark'));
                 dropdownPlay.prop('selectedIndex', 0);
 
                 dropdownPeriod.empty();
@@ -82,6 +97,9 @@ $( document ).ready(function() {
    $('#period').change(function (){
         period=$(this).val();
    });
+   $('#ranking').change(function (){
+        ranking=$(this).val();
+   });
    $('#player').change(function (){
         player=$(this).val();
    });
@@ -90,30 +108,48 @@ $( document ).ready(function() {
    });
    $('#createVideo').click(function (){
        var clips = [];
-       matchData.report.matchTrxs.forEach(
+        matchData.report.matchTrxs.forEach(
             function(obj) {
                 if (play !=null && contains(obj,play) ) {
                     if (period !=null && period == obj.period ) {
                         if (team ==null) {
-                            clips.push({"start": parseInt(obj.matchSeconds),"end":  parseInt(obj.matchSeconds)+cliplength});
+                            clips.push({"start": parseInt(obj.matchSeconds),"end":  parseInt(obj.matchSeconds)+cliplength, "ranking": parseInt(obj.ranking)});
                         }
                         else if(team == obj.squadId) {
                             if (player ==null) {
-                                clips.push({"start": parseInt(obj.matchSeconds),"end":  parseInt(obj.matchSeconds)+cliplength});
+                                clips.push({"start": parseInt(obj.matchSeconds),"end":  parseInt(obj.matchSeconds)+cliplength,"ranking": parseInt(obj.ranking)});
                             }
                             else if (player == obj.playerId){
-                                clips.push({"start": parseInt(obj.matchSeconds),"end":  parseInt(obj.matchSeconds)+cliplength});
+                                clips.push({"start": parseInt(obj.matchSeconds),"end":  parseInt(obj.matchSeconds)+cliplength,"ranking": parseInt(obj.ranking)});
                             }
                         }
                     }        
                 }
         });
+	console.log(clips);
+
+	if (ranking =="asc"){
+		clips.sort(asc);
+	}
+	if (ranking =="desc"){
+		clips.sort(desc);
+	}
+	if (ranking =="top"){
+		console.log("Top Content");
+		clips.sort(desc);
+		clips.splice(0,clips.length-1);
+	}
+	if (ranking =="top5"){
+		clips.sort(desc);
+		clips.splice(0,clips.length-5);
+	}
+
+	console.log(clips);
         if (clips.length > 0){
           $('#result').text("");  
           json.clips=clips;
           base64=btoa(JSON.stringify(json));
           var video2 = videojs("vid2");
-          //https://web.damitha.xyz/skunkapi/ewoJImJhc2VEb21haW4iOiJodHRwczovL2JwbXVsdGlobHN2b2RzMjU3Lm5nY2RuLnRlbHN0cmEuY29tIiwKCSJ1cmxQcmVmaXgiOiIvaGxzLXZvZC9pbmdlc3RfYWZsZmlsbXNfdm9kLzIwMTgvMDYvOTYyNDc2L1ZPRF9Tb3VyY2UvMjAxOC0wNi0wOV8wNS00My0zMi0xNDUyIiwKCSJhc3NldExlbmd0aCI6MjI3LAoJInJhdGVzIjpbCgkJeyJyYXRlIjoyNDAwMDAwLCAicGxheUxpc3ROYW1lIjoib3V0cHV0XzI0MDBrYnBzXzcyMHAubXA0In0sCgkJeyJyYXRlIjo3MDAwMDAsICJwbGF5TGlzdE5hbWUiOiJvdXRwdXRfNzAwa2Jwc18zNjBwLm1wNCJ9LAoJCXsicmF0ZSI6NDAwMDAwLCAicGxheUxpc3ROYW1lIjoib3V0cHV0XzQwMGticHNfMjcwcC5tcDQifSwKCQl7InJhdGUiOjIzNjAwMCwgInBsYXlMaXN0TmFtZSI6Im91dHB1dF8yMzZrYnBzXzE4MHAubXA0In0sCgkJeyJyYXRlIjoxNjgwMDAsInBsYXlMaXN0TmFtZSI6Im91dHB1dF8xNjhrYnBzXzE4MHAubXA0In0KCV0sCgkic2VnbWVudExlbmd0aCI6OCwKCSJmdWxsTGVuZ3RoIjowLAoJImNsaXBzIjogWwoJCXsgInN0YXJ0IjoxMDAsImVuZCI6MTIwIH0sCgkJeyAic3RhcnQiOjUwMCwiZW5kIjo1MjAgfSwKCQl7ICJzdGFydCI6NzAwLCJlbmQiOjc1MCB9LAoJCXsgInN0YXJ0IjoxMjAwLCJlbmQiOjEyMzAgfQoJXQp9CgoK/playlist.m3u8
           video2.src("https://web.damitha.xyz/skunkapi/"+base64+"/playlist.m3u8");
           video2.play();
         } else {
@@ -123,6 +159,14 @@ $( document ).ready(function() {
    });
     loadData();
 });
+
+function asc(a,b) {
+  return a.ranking - b.ranking;
+}
+function desc(a,b) {
+  return b.ranking - a.ranking;
+}
+
 
 function contains(obj,play){
     for (var i = 0; i < obj.stats.length; i++) {
