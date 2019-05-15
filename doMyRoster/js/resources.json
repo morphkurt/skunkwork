@@ -1,0 +1,114 @@
+{
+  "resources": [
+    {
+      "visual": false, 
+      "depend": null, 
+      "name": "Damitha", 
+      "sun": true, 
+      "audio": true, 
+      "maxLoad": 0.3, 
+      "sat": true,
+      "point": true,
+      "blockout": [
+	"2019-06-08",
+	"2019-06-09",
+	"2019-06-22",
+	"2019-06-23"
+      ]
+    }, 
+    {
+      "visual": false, 
+      "depend": null, 
+      "point": true,
+      "name": "Steve", 
+      "sun": true, 
+      "audio": true, 
+      "maxLoad": 0.3, 
+      "sat": true
+    },
+
+    {
+      "visual": true, 
+      "depend": null, 
+      "name": "Hannah", 
+      "sun": true, 
+      "audio": true, 
+      "pointNeeded": true,
+      "maxLoad": 0.3, 
+      "sat": true
+    },  
+    {
+      "visual": false, 
+      "depend": "Kevin", 
+      "name": "Yoan", 
+      "sun": true, 
+      "pointNeeded": true,
+      "audio": true, 
+      "maxLoad": 0.3, 
+      "sat": false
+    },
+    {
+      "visual": false, 
+      "depend": null, 
+      "name": "David", 
+      "point": true,
+      "sun": true, 
+      "audio": true, 
+      "maxLoad": 0.3, 
+      "sat": false,
+      "startDate": "2019-08-01"
+    }, 
+    {
+      "visual": true, 
+      "depend": null, 
+      "name": "Eddie", 
+      "sun": true, 
+      "audio": false, 
+      "maxLoad": 0.25, 
+      "sat": false,
+      "startDate": "2019-06-15"
+    }, 
+    {
+      "visual": true, 
+      "depend": null, 
+      "name": "Grace", 
+      "sun": true, 
+      "audio": false, 
+      "maxLoad": 0.3, 
+      "sat": false
+    }, 
+    {
+      "visual": true, 
+      "depend": null, 
+      "name": "Immanuel", 
+      "sun": false, 
+      "audio": false, 
+      "maxLoad": 0.25, 
+      "sat": true
+    },
+    {
+      "visual": false, 
+      "depend": null, 
+      "name": "Sol", 
+      "sun": false, 
+      "audio": true, 
+      "maxLoad": 0.2, 
+      "sat": true
+    },
+    {
+      "visual": true, 
+      "depend": null, 
+      "name": "Mark", 
+      "sun": true, 
+      "audio": false, 
+      "maxLoad": 0.15, 
+      "sat": true,
+      "blockout": [
+	"2019-06-09",
+	"2019-06-30"
+      ]
+
+    }
+
+  ]
+}

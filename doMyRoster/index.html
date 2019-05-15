@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Your page title here :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+    <!-- javascript Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/en-au.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+  <script src="js/app.js"></script>
+
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="six columns" style="margin-top: 5%">
+        <h4>roster</h4>
+        <table class="u-full-width" id="roster-table">
+         <thead>
+	    <tr>
+	      <th>date</th>
+	      <th>audio</th>
+	      <th>visual</th>
+	      <th>point</th>
+	    </tr>
+	  </thead>
+	  <tbody id="roster-table-body">
+	  	<tr></tr>
+	  </tbody>
+	</table>
+      </div>
+      <div class="six columns" style="margin-top: 5%">
+        <h4>resources</h4>
+        <input type="text" id="startdatepicker" value="start date">
+	   <input type="text" id="enddatepicker" value="end date">
+
+        <table class="u-full-width" id="member-table">
+	  <thead>
+	    <tr>
+	      <th>name</th>
+	      <th>audio</th>
+	      <th>visual</th>
+	      <th>point</th>
+	      <th>sat</th>
+	      <th>sun</th>
+	      <th>maxload</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	   
+	  </tbody>
+	</table>
+	<input type="button" value="generate" id="generate">
+	<input type="button" value="cancel">
+	
+      </div>
+    </div>
+  </div>
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
