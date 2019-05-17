@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Do My Roster</title>
+    <meta name="Get JS to do my roster" content="">
+    <meta name="Damitha Gunawardena" content="">
+
+    <!-- javascript Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/en-au.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+      <script src="https://unpkg.com/vuejs-datepicker"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     
+ 
+
+ 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+     
+
+
+  <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+ 
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+  </head>
+  <body>
+
+  <!-- Primary Page Layout
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container" id="container">
+     <div class="row">
+        <div class="six columns" style="margin-top: 5%">
+          <h4>roster</h4>
+          <table class="u-full-width" id="roster-table">
+            <thead>
+             <tr>
+               <th>date</th>
+               <th>audio</th>
+               <th>visual</th>
+               <th>point</th>
+             </tr>
+            </thead>
+            <tbody id="roster-table-body">
+                <tr v-for="row in days">
+                    <td> {{ row.date}} </td>
+                    <td> {{ row.audio }} </td>
+                    <td> {{ row.visual }} </td>
+                    <td> {{ row.point }} </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+      <div class="six columns" style="margin-top: 5%">
+        <h4>resources</h4>
+        <div class="three columns">
+          <vuejs-datepicker id="start-date" v-model="startDate" placeholder="Start date"></vuejs-datepicker>
+        </div>
+        <div class="three columns">
+          <vuejs-datepicker id="end-date" v-model="endDate" placeholder="End date"></vuejs-datepicker>
+        </div>
+        <table class="u-full-width" id="roster-table">
+            <thead>
+              <tr>
+                <th>name</th>
+                <th>sat</th>
+                <th>sun</th>
+                <th>visual</th>
+                <th>audio</th>
+                <th>point</th>
+                <th>maxLoad</th>
+              </tr>
+            </thead>
+            <tbody id="member-table-body">
+                <tr v-for="row in members">
+                    <td> {{ row.name }} </td>
+                    <td><input type="checkbox" v-bind:id="row.name" v-model="row.visual"></td>
+                    <td><input type="checkbox" v-bind:id="row.sat" v-model="row.sat"></td>
+                    <td><input type="checkbox" v-bind:id="row.sun" v-model="row.sun"></td>
+                    <td><input type="checkbox" v-bind:id="row.name" v-model="row.audio"></td>
+                    <td><input type="checkbox" v-bind:id="row.name" v-model="row.point"></td>
+                    <td> {{ row.maxLoad * 100 }}%</td>
+                </tr>
+            </tbody>
+         </table>
+         <div id="control-button">
+            <button v-on:click="generate">generate</button>
+            <button v-on:click="cancel">cancel</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+  <script src="js/util.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
