@@ -12,6 +12,7 @@ dhcp-range=10.0.0.32,10.0.0.248,255.255.255.0,2h
 dhcp-option=3,10.0.0.4
 # DNS (This is where your transparent proxy runs )
 dhcp-option=6,10.0.0.1
+```
 
 ## start dnsmasq
 ```bash
