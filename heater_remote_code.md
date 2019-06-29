@@ -7,3 +7,6 @@ Power -> FF807F
 Mode -> FF00FF
 UP -> FFB04F
 Down -> FF906F
+Timer -> FF30CF
+Osc -> FF20DF
+Cancel - FF10EF
