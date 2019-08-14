@@ -24,7 +24,7 @@ var memberContainer = new Vue({
     methods: {
 	query: function(embed_code,api_key,secret){
 		var expires = Math.floor(Date.now() / 1000) +300;
-		axios.get("https://api.ooyala.com/v2/assets/"+embed_code+"metadata?api_key="+api_key+"&expires="+expires+"&signature="+getSignature(secret,api_key,"GET",
+		axios.get("https://api.ooyala.com/v2/assets/"+embed_code+"/metadata?api_key="+api_key+"&expires="+expires+"&signature="+getSignature(secret,api_key,"GET",
         		"/v2/assets/"+embed_code+'/metadata',expires,'')).then(({data}) =>{
 			var metadata = data.concurrentMatchID;
 			var metaDataArray = metadata.split(',');
@@ -78,7 +78,7 @@ var memberContainer = new Vue({
 		var jsonBody = JSON.stringify({"concurrentMatchID":matchIdCsv})
 		
 		console.log(jsonBody);
-        	axios.patch("https://api.ooyala.com/v2/assets/"+embed_code+"metadata?api_key="+api_key+"&expires="+expires+"&signature="+getSignature(secret,api_key,"PATCH",
+        	axios.patch("https://api.ooyala.com/v2/assets/"+embed_code+"/metadata?api_key="+api_key+"&expires="+expires+"&signature="+getSignature(secret,api_key,"PATCH",
         		"/v2/assets/"+embed_code+'/metadata',expires,jsonBody),jsonBody).then(({data}) =>{
 			var metadata = data.concurrentMatchID;
 			var metaDataArray = metadata.split(',');
