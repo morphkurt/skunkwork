@@ -1,0 +1,7 @@
+{
+	"resources" : [
+		{ "matchId":1212,"enable": false },
+		{ "matchId":1211,"enable": false },
+		{ "matchId":1212,"enable": true }
+	]
+}
