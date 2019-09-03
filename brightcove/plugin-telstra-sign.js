@@ -15,7 +15,6 @@ videojs.registerPlugin('pluginDev', function(options) {
         			video.sources[i].src = sign(video.sources[i].src,options);
       			}
     	  	}
-		console.log(video.sources[i].src);
     	  	myPlayer.catalog.load(video);
     	  });
 	});
