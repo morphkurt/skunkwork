@@ -3,6 +3,7 @@ videojs.registerPlugin('pluginDev', function(options) {
 	var videoId;
 	myPlayer.ready(function(){
 	  videoId = myPlayer.mediainfo.id;
+	  console.log(videoId);
 	  myPlayer.catalog.getVideo(videoId, function(error, video){
 	  	for(var i=0;i<video.sources.length;i++){
       			if(video.sources[i].src){
