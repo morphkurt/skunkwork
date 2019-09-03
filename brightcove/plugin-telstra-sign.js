@@ -1,11 +1,12 @@
-videojs.registerPlugin('pluginName', function(options) {
+videojs.getPlayer('pluginName', function(options) {
     var myPlayer = this;
-    	  myPlayer.catalog.getVideo('6082702003001', function(error, video){
-	  	for(var i=0;i<video.sources.length;i++){
-      			if(video.sources[i].src){
-        			video.sources[i].src = sign(video.sources[i].src,options);
+    myPlayer.on('loadstart', function(evt) {
+	    var sources = myPlayer.mediainfo.sources;
+	    for(var i=0;i<sources.length;i++){
+      			if(sources[i].src){
+        			sources[i].src = sign(sources[i].src,options);
       			}
-    	  	}
-    	  	myPlayer.catalog.load(video);
-    	  });    
+    	    }
+	    
+    }
 });
