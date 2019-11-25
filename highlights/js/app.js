@@ -14,6 +14,8 @@ let team;
 let play;
 let ranking;
 
+let qrcode;
+
 let cliplength=10;
 
 var json={
@@ -31,9 +33,21 @@ var json={
     "fullLength":0,
 };
 
+function updateQR(url){
+    axios.get('https://whispering-waters-99783.herokuapp.com/shorten?url='+url,).then(({ data }) => {
+        qrcode.clear(); // clear the code.
+        console.log(data.short)
+        qrcode.makeCode("https://whispering-waters-99783.herokuapp.com/e/"+data.short); // make another code.
+    });
+
+}
+
 
 
 function loadData() {
+        qrcode =  new QRCode(document.getElementById("qrcode"), "");
+
+
         $.getJSON( "https://raw.githubusercontent.com/morphkurt/skunkwork/master/videoclip/js/vision-trxs-20180142701.json", function( json ) {
                 matchData=json;
                 dropdownTeam = $('#team');
@@ -147,9 +161,11 @@ $( document ).ready(function() {
 	console.log(clips);
         if (clips.length > 0){
           $('#result').text("");  
+ 
           json.clips=clips;
           base64=btoa(JSON.stringify(json));
           var video2 = videojs("vid2");
+          updateQR("https://whispering-waters-99783.herokuapp.com/"+base64+"/playlist.m3u8")
           video2.src("https://whispering-waters-99783.herokuapp.com/"+base64+"/playlist.m3u8");
           video2.play();
         } else {
