@@ -150,7 +150,7 @@ $( document ).ready(function() {
           json.clips=clips;
           base64=btoa(JSON.stringify(json));
           var video2 = videojs("vid2");
-          video2.src("https://whispering-waters-99783.herokuapp.com/skunkapi/"+base64+"/playlist.m3u8");
+          video2.src("https://whispering-waters-99783.herokuapp.com/"+base64+"/playlist.m3u8");
           video2.play();
         } else {
           $('#result').text("Selection Not Found");  
