@@ -149,7 +149,6 @@ $( document ).ready(function() {
           $('#result').text("");  
           json.clips=clips;
           base64=btoa(JSON.stringify(json));
-	  var qrcode = new QRCode(document.getElementById("qrcode"), "http://jindo.dev.naver.com/collie");
           var video2 = videojs("vid2");
           video2.src("https://whispering-waters-99783.herokuapp.com/"+base64+"/playlist.m3u8");
           video2.play();
