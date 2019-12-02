@@ -7,6 +7,10 @@
 videojs.registerPlugin('AdobeConviva', function (options) {
 
     simpleAnalytics = function (options) {
+	var prod = false;
+	if (options.env = "prod"){
+	  prod = true;
+	} 
         var myPlayer = this;
         var isContentLoaded = false;
         var videoDuration;
@@ -18,7 +22,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
         var metadata = {};
         convivaHelper = new ConvivaHelper();
         convivaHelper.initializeConviva();
-        convivaHelper._testingEnvironment = true; // set to false in production 
+        convivaHelper._testingEnvironment = prod; // set to false in production 
 
 
         function ABDMediaOPEN() {
