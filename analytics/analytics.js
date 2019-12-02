@@ -9,8 +9,10 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     simpleAnalytics = function (options) {
 	var prod = false;
 	console.log(JSON.stringify(options))
-	if (options && options["env"] == "prod"){
-	  prod = true;
+	if (!options){
+		console.log("Options has not been added, please add the options on video cloud")
+	} else {
+	  prod = options["env"];
 	} 
         var myPlayer = this;
         var isContentLoaded = false;
@@ -21,7 +23,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
         var isPlaying = false;
 
         var metadata = {};
-        convivaHelper = new ConvivaHelper();
+        convivaHelper = new ConvivaHelper(options);
         convivaHelper.initializeConviva();
         convivaHelper._testingEnvironment = prod; // set to false in production 
 
