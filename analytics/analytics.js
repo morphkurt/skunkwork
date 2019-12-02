@@ -5,7 +5,7 @@
 //(function(window, document, vjs, undefined) {
 
 videojs.registerPlugin('AdobeConviva', function (options) {
-
+    console.log(JSON.stringify(options))
     simpleAnalytics = function (options) {
 	var prod = false;
 	console.log(JSON.stringify(options))
