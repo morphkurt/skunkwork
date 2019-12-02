@@ -5,14 +5,19 @@
 //(function(window, document, vjs, undefined) {
 
 videojs.registerPlugin('AdobeConviva', function (options) {
-    console.log(JSON.stringify(options))
+    
+    function log(m,testing){
+        if (testing){
+         console.log(m)   
+        }
+    }
 
-    var prod = false;
-    console.log(JSON.stringify(options))
+    var testing = true;
+    log(JSON.stringify(options),testing)
     if (!options) {
-        console.log("Options has not been added, please add the options on video cloud")
+        log("Options has not been added, please add the options on video cloud",testing)
     } else {
-        prod = (options["env"] == "production");
+        testing = (options["env"] == "testing");
     }
     var myPlayer = this;
     var isContentLoaded = false;
@@ -25,14 +30,14 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     var metadata = {};
     convivaHelper = new ConvivaHelper(options);
     convivaHelper.initializeConviva();
-    convivaHelper._testingEnvironment = prod; // set to false in production 
+    convivaHelper._testingEnvironment = testing; // set to false in production 
 
 
     function ABDMediaOPEN() {
-        console.log("++ IN ABDMediaOPEN TOP ++");
+        log("++ IN ABDMediaOPEN TOP ++",testing);
         //Check the metadata is loaded
         if (isContentLoaded) {
-            console.log("++ IN ABDMediaOPEN content loaded ++");
+            log("++ IN ABDMediaOPEN content loaded ++",testing);
             //Get all required metadata
             currentTime = myPlayer.currentTime();
             mediaName = myPlayer.mediainfo.name;
@@ -64,8 +69,8 @@ videojs.registerPlugin('AdobeConviva', function (options) {
             s.Media.open(mediaName, videoDuration, mediaPlayerName);
             //Check if video is playing
             if (isPlaying) {
-                console.log("++IN ABDMediaOPEN video is playing " + mediaName + " | " + videoDuration);
-                console.log();
+                log("++IN ABDMediaOPEN video is playing " + mediaName + " | " + videoDuration,testing);
+              
                 //Play Adobe Analytics Media module from beginning.
                 s.Media.play(mediaName, currentTime);
             }
@@ -79,7 +84,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     }
 
     myPlayer.on('loadstart', function () {
-        console.log("++loadstart - " + myPlayer.mediainfo.name);
+        log("++loadstart - " + myPlayer.mediainfo.name,testing);
         //Check that metadata is loaded
         if (myPlayer.mediainfo.name) {
             isContentLoaded = true;
@@ -89,7 +94,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     });
 
     myPlayer.on('firstplay', function () {
-        console.log("++firstplay - " + myPlayer.mediainfo.name);
+        log("++firstplay - " + myPlayer.mediainfo.name,testing);
 
         //Check if metadata loaded - needed to make sure correct video media module instance is tracked.
         if (isContentLoaded) {
@@ -103,7 +108,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     });
 
     myPlayer.on('play', function () {
-        console.log("++Played - " + myPlayer.mediainfo.name);
+        log("++Played - " + myPlayer.mediainfo.name,testing);
         isPlaying = true;
         //Check if metadata loaded - needed to make sure correct video media module instance is tracked.
         if (isContentLoaded) {
@@ -115,7 +120,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     });
 
     myPlayer.on("playing", function () {
-        console.log("++ In Playing ++")
+        log("++ In Playing ++",testing)
         convivaHelper.setPlayerWidthAndHeight(myPlayer.videoWidth(), myPlayer.videoHeight());
         convivaHelper.updatePlayerState("playing");
     });
@@ -123,7 +128,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
 
     myPlayer.on('pause', function () {
         isPlaying = false;
-        console.log("++paused - " + myPlayer.mediainfo.name);
+        log("++paused - " + myPlayer.mediainfo.name,testing);
         //Check if metadata loaded - needed to make sure correct video media module instance is tracked.
         if (isContentLoaded) {
             currentTime = myPlayer.currentTime();
@@ -134,15 +139,15 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     });
 
     myPlayer.on('progress', function () {
-        console.log("progressed - " + myPlayer.mediainfo.name);
+        log("progressed - " + myPlayer.mediainfo.name,testing);
     });
 
     myPlayer.on('resize', function () {
-        console.log("resized - " + myPlayer.mediainfo.name);
+        log("resized - " + myPlayer.mediainfo.name,testing);
     });
 
     myPlayer.on('seeked', function () {
-        console.log("++seeked - " + myPlayer.mediainfo.name);
+        log("++seeked - " + myPlayer.mediainfo.name,testing);
         //Check if metadata loaded - needed to make sure correct video media module instance is tracked.
         if (isContentLoaded) {
             currentTime = myPlayer.currentTime();
@@ -153,7 +158,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     });
 
     myPlayer.on('seeking', function () {
-        console.log("++seeking - " + myPlayer.mediainfo.name);
+        log("++seeking - " + myPlayer.mediainfo.name,testing);
         //Check if metadata loaded - needed to make sure correct video media module instance is tracked.
         if (isContentLoaded) {
             currentTime = myPlayer.currentTime();
@@ -163,26 +168,26 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     });
 
     myPlayer.on('timeupdate', function () {
-        console.log("++timeupdate - " + myPlayer.mediainfo.name);
+        log("++timeupdate - " + myPlayer.mediainfo.name,testing);
     });
 
     myPlayer.on('volumechange', function () {
-        console.log("++volumechange - " + myPlayer.mediainfo.name);
+        log("++volumechange - " + myPlayer.mediainfo.name,testing);
     });
 
     myPlayer.on('waiting', function () {
-        console.log("++waiting - " + myPlayer.mediainfo.name);
+        log("++waiting - " + myPlayer.mediainfo.name,testing);
         if (isContentLoaded) {
             convivaHelper.updatePlayerState("waiting");
         }
     });
 
     myPlayer.on('durationchange', function () {
-        console.log("++durationchange - " + myPlayer.mediainfo.name);
+        log("++durationchange - " + myPlayer.mediainfo.name,testing);
     });
 
     myPlayer.on('ended', function () {
-        console.log("++ended - " + myPlayer.mediainfo.description);
+        log("++ended - " + myPlayer.mediainfo.description,testing);
         //Check if metadata loaded - needed to make sure correct video media module instance is tracked.
         if (isContentLoaded) {
             currentTime = myPlayer.currentTime();
@@ -196,7 +201,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     });
 
     myPlayer.on("bc-catalog-error", function () {
-        console.log("++ In Catalog Error ++");
+        log("++ In Catalog Error ++",testing);
         const error = myPlayer.error_;
         const code = error.code;
         const message = error.message;
@@ -206,7 +211,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     });
 
     myPlayer.on("error", function () {
-        console.log("++ In Error ++");
+        log("++ In Error ++",testing);
         const error = myPlayer.error_;
         const code = error.code;
         const message = error.message;
@@ -216,16 +221,16 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     });
 
     myPlayer.on('fullscreenchange', function () {
-        console.log("++fullscreenchange - " + myPlayer.mediainfo.name);
+        log("++fullscreenchange - " + myPlayer.mediainfo.name,testing);
     });
 
     myPlayer.on('loadedalldata', function () {
-        console.log("++loadedalldata - " + myPlayer.mediainfo.name);
+        log("++loadedalldata - " + myPlayer.mediainfo.name,testing);
 
     });
 
     myPlayer.on('loadeddata', function () {
-        console.log("++loadeddata - " + myPlayer.mediainfo.name);
+        log("++loadeddata - " + myPlayer.mediainfo.name,testing);
         const tech_ = myPlayer.tech_;
         if (tech_) {
             const hls = tech_.hls; // Brightcove hls plugin
@@ -233,14 +238,14 @@ videojs.registerPlugin('AdobeConviva', function (options) {
                 const media = hls.playlists.media();
                 if (media && media.attributes && media.attributes.BANDWIDTH) {
                     convivaHelper.contentSetBitrateKbps(media.attributes.BANDWIDTH / 1000);
-                    console.log(media.attributes.BANDWIDTH / 1000);
+                    log(media.attributes.BANDWIDTH / 1000,testing);
                 }
             }
         }
     });
 
     myPlayer.on('loadedmetadata', function () {
-        console.log("++loadedmetadata - " + myPlayer.mediainfo.name);
+        log("++loadedmetadata - " + myPlayer.mediainfo.name,testing);
         if (myPlayer.mediainfo.name) {
             isContentLoaded = true;
             //Initiate Adobe Analytics Media Module tracking && Conviva Analytics
