@@ -30,7 +30,6 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     var metadata = {};
     convivaHelper = new ConvivaHelper(options);
     convivaHelper.initializeConviva();
-    convivaHelper._testingEnvironment = testing; // set to false in production 
 
 
     function ABDMediaOPEN() {
