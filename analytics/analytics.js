@@ -4,7 +4,7 @@
 
 //(function(window, document, vjs, undefined) {
 
-videojs.registerPlugin('pluginDev', function (options) {
+videojs.registerPlugin('AdobeConviva', function (options) {
 
     simpleAnalytics = function (options) {
         var myPlayer = this;
@@ -34,7 +34,7 @@ videojs.registerPlugin('pluginDev', function (options) {
 
                 metadata["id"] = myPlayer.mediainfo.id;
                 metadata["title"] = mediaName;
-                metadata["url"] = sign(myPlayer.mediainfo.sources[0].src);
+                metadata["url"] = myPlayer.mediainfo.sources[0].src;
                 metadata["live"] = false;
                 metadata["durationSec"] = videoDuration;
                 metadata["streamType"] = myPlayer.mediainfo.sources[0].type;
