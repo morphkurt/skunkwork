@@ -4,7 +4,7 @@
 
 /// Handles the complex/repetitive parts of the Conviva integration.
 
-var ConvivaHelper = function () {
+var ConvivaHelper = function (options) {
 
   // Whether the video application is in testing or production mode.
   this._testingEnvironment = true;
@@ -23,7 +23,7 @@ var ConvivaHelper = function () {
 
   // Provides ClientSettings to configure Conviva Client in testing mode.
   function getTestingClientSettings () {
-    var credentials = ConvivaCredentials["testing"];
+    var credentials = options.ConvivaCredentials["testing"];
     var clientSettings = null;
     try {
       clientSettings = new Conviva.ClientSettings(credentials.customerKey);
@@ -39,7 +39,7 @@ var ConvivaHelper = function () {
 
   // Provides ClientSettings to configure Conviva Client in production mode.
   function getProductionClientSettings () {
-    var credentials = ConvivaCredentials["production"];
+    var credentials = options.ConvivaCredentials["production"];
     var clientSettings = null;
     try {
       clientSettings = new Conviva.ClientSettings(credentials.customerKey);
