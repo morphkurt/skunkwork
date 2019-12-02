@@ -62,8 +62,8 @@ var ConvivaHelper = function (options) {
   // Provides SystemSettings to configure Conviva SystemFactory in production mode.
   function getProductionSystemSettings () {
     var systemSettings = new Conviva.SystemSettings();
-    // systemSettings.logLevel = Conviva.SystemSettings.LogLevel.ERROR; // default
-    systemSettings.logLevel = Conviva.SystemSettings.LogLevel.DEBUG; // default
+    systemSettings.logLevel = Conviva.SystemSettings.LogLevel.ERROR; // default
+    //systemSettings.logLevel = Conviva.SystemSettings.LogLevel.DEBUG; // default
     // systemSettings.allowUncaughtExceptions = false; // default
     return systemSettings;
   }
