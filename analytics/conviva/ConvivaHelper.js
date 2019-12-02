@@ -23,7 +23,7 @@ var ConvivaHelper = function (options) {
 
   // Provides ClientSettings to configure Conviva Client in testing mode.
   function getTestingClientSettings () {
-    var credentials = options.ConvivaCredentials["testing"];
+    var credentials = options["testing"];
     var clientSettings = null;
     try {
       clientSettings = new Conviva.ClientSettings(credentials.customerKey);
@@ -39,7 +39,7 @@ var ConvivaHelper = function (options) {
 
   // Provides ClientSettings to configure Conviva Client in production mode.
   function getProductionClientSettings () {
-    var credentials = options.ConvivaCredentials["production"];
+    var credentials = options["production"];
     var clientSettings = null;
     try {
       clientSettings = new Conviva.ClientSettings(credentials.customerKey);
