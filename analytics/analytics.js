@@ -12,7 +12,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
         }
     }
 
-    var testing = true;
+    var testing = false;
     log(JSON.stringify(options),testing)
     if (!options) {
         log("Options has not been added, please add the options on video cloud",testing)
