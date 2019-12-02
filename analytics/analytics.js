@@ -8,7 +8,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
 
     simpleAnalytics = function (options) {
 	var prod = false;
-	console.log(JSON.stringfy(options))
+	console.log(JSON.stringify(options))
 	if (options && options["env"] == "prod"){
 	  prod = true;
 	} 
