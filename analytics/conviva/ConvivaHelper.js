@@ -7,7 +7,7 @@
 var ConvivaHelper = function (options) {
 
   // Whether the video application is in testing or production mode.
-  this._testingEnvironment = true;
+  this._testingEnvironment = (options["env"] == "testing");
 
   // A reference to the Conviva Client instance, if it exists.
   this._client = null;
