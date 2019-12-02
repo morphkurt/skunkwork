@@ -253,27 +253,7 @@ videojs.registerPlugin('AdobeConviva', function (options) {
     //		videojs.getPlayers()[v].simpleAnalytics();
     //	}
 
-    window.addEventListener('load', function () {
-       console.log('All assets are loaded');
-
-        var wait_for_videojs_afl;
-
-        wait_for_videojs_afl = setInterval(function () {
-            if (typeof videojs == "function") {
-                clearInterval(wait_for_videojs_afl);
-                var registerPlugin = videojs.registerPlugin || videojs.plugin;
-                registerPlugin("simpleAnalytics", simpleAnalytics);
-
-                for (var v in videojs.getPlayers()) {
-                    videojs.getPlayers()[v].simpleAnalytics();
-                }
-
-            }//end if
-        }, 750);
-
-    });
-
-
+ 
     //});
 
     function getPlayerName() {
