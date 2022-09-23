@@ -1,0 +1,38 @@
+.small { font: normal 8px sans-serif; color: #4a4a4a;}
+
+
+#rate {display: none;}
+svg g:hover #rate {display: block; color: #4a4a4a } 
+
+
+.horizontal-scroll-wrapper {
+    height: 200px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.horizontal-scroll-wrapper img { 
+    box-shadow: 1px 1px 10px #999; 
+    margin: 2px;
+    max-height: 190px;
+    cursor: pointer;
+display:inline-block;
+*display:inline;
+*zoom:1;
+vertical-align:top;
+}
+
+.thumb-wrapper {
+    position:relative;
+}
+    
+.thumbwrapperspan {
+    position:absolute;
+    top: 80px;
+    left: 130px;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: transparent url('../img/play-button.png') no-repeat;
+}
