@@ -93,6 +93,7 @@ var root = new Vue({
                     })[0]
                     var options = {};
                     var player = videojs('my-player');
+                    let source = sources.filter(s => s.type == "application/x-mpegURL" && s.src.startsWith("https"));
                     let src = source.src.replace('http://', 'https://') + "&secure=true"
                     this.src = source
                     let type = source.type
