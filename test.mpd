@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" profiles="urn:mpeg:dash:profile:full:2011" minBufferTime="PT1.5S">
+  <BaseURL>https://video-private-assets.canva-dev.com</BaseURL>
+  <Period id="0" start="PT0.0S" duration="PT220.96666666666667S">
+    <AdaptationSet subsegmentAlignment="true" subsegmentStartsWithSAP="1">
+      <Representation id="0" mimeType="audio/mp4" codecs="mp4a.40.2" bandwidth="127491">
+        <BaseURL>/VAFbQV_3mnc/a/868de735d9.m4a?exp=1677106020000&amp;cf-ck=o-C-PPgvQMa0d3cz0oZDCv5RmpLqbQWKSCtD86oADZg&amp;cf-sig=NxkQ0zNHn3I3V-24a2hOlsZ0nFF3U8iFZi9FcqxrHe0&amp;cf-sig-kid=AngEaH7aCpA=&amp;sig=5_oXk6xwdOPDtsCn5jEJ4xyTelsvRn9NqEgUwFexqV0&amp;sig-kid=vcrKNu8FBPU=</BaseURL>
+        <SegmentBase indexRangeExact="true" indexRange="749-2120">
+          <Initialization range="0-748"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet subsegmentAlignment="true" subsegmentStartsWithSAP="1">
+      <Representation id="1" mimeType="video/mp4" codecs="avc1.640014" bandwidth="92893" width="320" height="180">
+        <BaseURL>/VAFbQV_3mnc/d/1bdf6d1f81.mp4?exp=1677106020000&amp;cf-ck=4liL0aHO8NrU7INhnF2QjXN8v7W-sjMOVr_QfC76gkk&amp;cf-sig=ClBnjfCHporSaWd5bPE1iKuTjtWdY401iyEDlg5OCXE&amp;cf-sig-kid=AngEaH7aCpA=&amp;sig=Mk9szM8U-3LyB-m9yADO8KgQPDmbGJFAI909NTGmPW8&amp;sig-kid=vcrKNu8FBPU=</BaseURL>
+        <SegmentBase indexRangeExact="true" indexRange="822-2193">
+          <Initialization range="0-821"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="2" mimeType="video/mp4" codecs="avc1.64001f" bandwidth="644919" width="1280" height="720">
+        <BaseURL>/VAFbQV_3mnc/d/3de9fde620.mp4?exp=1677106020000&amp;cf-ck=gsRCDacu7oTE8__knHueHuo7REc1XSyRU9thFDgU_QM&amp;cf-sig=xFQgX0BNiPQ99_xyx_H-__PH-ElvT2Alxax6nYke6Kk&amp;cf-sig-kid=AngEaH7aCpA=&amp;sig=zXk0lK4Qv_8IgSG1bVT1dlXU7fM6eYwaEGuTFSjXi1c&amp;sig-kid=vcrKNu8FBPU=</BaseURL>
+        <SegmentBase indexRangeExact="true" indexRange="822-2193">
+          <Initialization range="0-821"/>
+        </SegmentBase>
+      </Representation>
+      <Representation id="3" mimeType="video/mp4" codecs="avc1.640028" bandwidth="1233557" width="1920" height="1080">
+        <BaseURL>/VAFbQV_3mnc/d/2a430055b7.mp4?exp=1677106020000&amp;cf-ck=3Av-Hq7UZklM46RuCqRcbO88WhEwbhR5So6u_vAtgEY&amp;cf-sig=Ib-Pu6pAxrdIDGco4NESLOPGs6NXZTJKQUrrwNOy508&amp;cf-sig-kid=AngEaH7aCpA=&amp;sig=i7ZFpSTVmp52f4ukoVKEnHqulolOr55CVSmuEZ9_iME&amp;sig-kid=vcrKNu8FBPU=</BaseURL>
+        <SegmentBase indexRangeExact="true" indexRange="824-2195">
+          <Initialization range="0-823"/>
+        </SegmentBase>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>
