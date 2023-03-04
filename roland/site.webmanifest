@@ -1,6 +1,6 @@
 {
     "name": "Roland ",
-    "short_name": "Screen Record",
+    "short_name": "Roland Remote",
     "icons": [
         {
             "src": "./src/assets/favicon/android-chrome-192x192.png",
