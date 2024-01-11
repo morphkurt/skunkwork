@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Load the latest version of Shaka Player -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.2/shaka-player.compiled.debug.js"></script>
+</head>
+
+<body>
+  <video id="video" width="640" controls autoplay></video>
+
+  <!-- Add a paragraph to display the current variant URLs -->
+  <p id="variant-url"></p>
+  <p id="display-support"></p>
+
+  <script>
+    // The URL of your MPEG-DASH .mpd manifest file
+    var dashStreamUrl = 'dash.mpd';
+    var hlsStreamUrl = 'manifest.m3u8';
+
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Instantiate Shaka Player
+    var video = document.getElementById('video');
+    var player = new shaka.Player(video);
+
+    // Show the current variant URL on screen when it changes
+    player.addEventListener('started', function () {
+      var currentVariant = player.getVariantTracks().find(function (track) {
+        return track.active;
+      });
+
+      if (currentVariant) {
+        r = currentVariant.hdr
+        if (r == 'PQ' || r == 'HLG') {
+          r = 'HDR'
+        } else {
+          r = 'SDR'
+        }
+        d = 'SDR'
+        if (window.matchMedia("(dynamic-range: high)").matches) {
+          d = 'HDR'
+        }
+        document.getElementById('variant-url').innerText = "Current Playback : " + r;
+        document.getElementById('display-support').innerText = "Display Support :" + d;
+      }
+    });
+
+    // Handle player errors
+    player.addEventListener('error', function (error) {
+      console.error('Error code', error.detail);
+    });
+
+    // Load the stream
+    var url = 'dash.mpd';
+    if (isSafari) {
+      url = 'master.m3u8'
+    }
+
+    player.load(url).then(function () {
+      console.log('The video has been loaded!');
+    });
+  </script>
+</body>
+
+</html>

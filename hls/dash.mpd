@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" profiles="urn:mpeg:dash:profile:full:2011">
+    <Period id="0" start="PT0.0S" duration="PT50.21S">
+        <AdaptationSet>
+        <EssentialProperty schemeIdUri="urn:mpeg:mpegB:cicp:TransferCharacteristics" value="16" />
+            <Representation id="0" mimeType="video/mp4" codecs="avc1.64001f" bandwidth="1988953" width="1280" height="536">
+                <BaseURL>short-hdr-34ff2ba7ad.mp4</BaseURL>
+                <SegmentBase indexRangeExact="true" indexRange="825-1176">
+                <Initialization range="0-824"/>
+                </SegmentBase>
+            </Representation>
+            <Representation id="1" mimeType="video/mp4" codecs="avc1.640014" bandwidth="181434" width="320" height="134">
+                <BaseURL>short-hdr-8a8fece192.mp4</BaseURL>
+                <SegmentBase indexRangeExact="true" indexRange="824-1175">
+                <Initialization range="0-823"/>
+                </SegmentBase>
+            </Representation>
+            <Representation id="2" mimeType="video/mp4" codecs="avc1.640015" bandwidth="594342" width="640" height="268">
+                <BaseURL>short-hdr-b45703ad6f.mp4</BaseURL>
+                <SegmentBase indexRangeExact="true" indexRange="825-1176">
+                <Initialization range="0-824"/>
+                </SegmentBase>
+            </Representation>
+            <Representation id="3" mimeType="video/mp4" codecs="avc1.640028" bandwidth="3985989" width="1920" height="804">
+                <BaseURL>short-hdr-d4cdbef049.mp4</BaseURL>
+                <SegmentBase indexRangeExact="true" indexRange="825-1176">
+                <Initialization range="0-824"/>
+                </SegmentBase>
+            </Representation>
+        </AdaptationSet>
+        <AdaptationSet>
+            <Representation id="0" mimeType="video/mp4" codecs="avc1.640015" bandwidth="630312" width="640" height="268">
+                <BaseURL>short-sdr-4ece521acd.mp4</BaseURL>
+                <SegmentBase indexRangeExact="true" indexRange="825-1176">
+                <Initialization range="0-824"/>
+                </SegmentBase>
+            </Representation>
+            <Representation id="1" mimeType="video/mp4" codecs="avc1.64001f" bandwidth="2031660" width="1280" height="536">
+                <BaseURL>short-sdr-712e61b68e.mp4</BaseURL>
+                <SegmentBase indexRangeExact="true" indexRange="825-1176">
+                <Initialization range="0-824"/>
+                </SegmentBase>
+            </Representation>
+            <Representation id="2" mimeType="video/mp4" codecs="avc1.640014" bandwidth="198358" width="320" height="134">
+                <BaseURL>short-sdr-98b2bd778a.mp4</BaseURL>
+                <SegmentBase indexRangeExact="true" indexRange="824-1175">
+                <Initialization range="0-823"/>
+                </SegmentBase>
+            </Representation>
+            <Representation id="3" mimeType="video/mp4" codecs="avc1.640028" bandwidth="3929846" width="1920" height="804">
+                <BaseURL>short-sdr-e4522b9dfd.mp4</BaseURL>
+                <SegmentBase indexRangeExact="true" indexRange="825-1176">
+                <Initialization range="0-824"/>
+                </SegmentBase>
+            </Representation>
+        </AdaptationSet>
+    </Period>
+</MPD>
