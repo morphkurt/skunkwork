@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Video Play Time</title>
+    </head>
+    <body>
+        <video id="myVideo" width="320" height="240" controls>
+            <source src="master_p.m3u8" type="video/mp4">
+        </video>
+        <div id="log"></div>
+        <script>
+            var myVideo = document.getElementById("myVideo");
+
+            myVideo.addEventListener('play', function() {
+                console.log('Play event triggered, start timing...');
+                this.start = Date.now();
+            }, false);
+
+            myVideo.addEventListener('playing', function() {
+                this.elapsed = Date.now() - this.start;
+                
+                var log = document.getElementById('log');
+                log.textContent = 'Time from triggering the play event to the video actually playing: ' + this.elapsed + ' ms';
+            }, false);
+        </script>
+    </body>
+</html>
