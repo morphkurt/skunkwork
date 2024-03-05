@@ -2,6 +2,8 @@
 <script>
 /* eslint-env browser */
 
+navigator.mediaDevices.getUserMedia({ video: true })
+
 let pc = new RTCPeerConnection({
   iceServers: [
     {
