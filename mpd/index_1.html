@@ -13,6 +13,7 @@ let pc = new RTCPeerConnection({
 })
 let log = msg => {
   document.getElementById('logs').innerHTML += msg + '<br>'
+  console.log(msg)
 }
 
 let sendChannel = pc.createDataChannel('foo')
@@ -26,6 +27,12 @@ pc.onicecandidate = event => {
     document.getElementById('localSessionDescription').value = btoa(JSON.stringify(pc.localDescription))
   }
 }
+pc.onconnectionstatechange = e => log('ConnectionState: ' + pc.connectionState)
+pc.ondatachannel = e => log('DataChannel: ' + e.channel)
+pc.onicecandidateerror = e => log('icecandidateerror: '  + e.errorCode + ',' + e.errorText)
+pc.onsignalingstatechange = e => log('signalingstatechange: ' + pc.signalingState)
+pc.ontrack = e => log('track: ' + e.track.id + ',' + e.kind)
+pc.onicegatheringstatechange = e => log('icegatheringstatechange: ' + pc.icegatheringstatechange)
 
 pc.onnegotiationneeded = e =>
   pc.createOffer().then(d => pc.setLocalDescription(d)).catch(log)
@@ -48,6 +55,7 @@ window.startSession = () => {
   try {
     pc.setRemoteDescription(JSON.parse(atob(sd)))
   } catch (e) {
+    console.log(e)
     alert(e)
   }
 }
@@ -57,6 +65,8 @@ window.copySDP = () => {
 
   browserSDP.focus()
   browserSDP.select()
+
+  console.log('copying...')
 
   try {
     const successful = document.execCommand('copy')
