@@ -31,6 +31,7 @@ pc.onnegotiationneeded = e =>
 window.sendMessage = () => {
   let message = document.getElementById('message').value
   if (message === '') {
+    console.log("sending message")
     return alert('Message must not be empty')
   }
 
@@ -46,6 +47,7 @@ window.startSession = () => {
   try {
     pc.setRemoteDescription(JSON.parse(atob(sd)))
   } catch (e) {
+    console.log(e)
     alert(e)
   }
 }
